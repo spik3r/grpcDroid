@@ -3,6 +3,7 @@ package kaitait.com.droidgrpc;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.text.method.ScrollingMovementMethod;
@@ -12,6 +13,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.common.util.concurrent.FutureCallback;
+import com.google.common.util.concurrent.Futures;
 import com.test.generated.LoginServiceGrpc;
 import com.test.generated.RegisteredUser;
 import com.test.generated.User;
@@ -53,10 +56,118 @@ public class MainActivity extends AppCompatActivity
         ((InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE))
                 .hideSoftInputFromWindow(hostEdit.getWindowToken(), 0);
         sendButton.setEnabled(false);
-        new GrpcTask().execute();
+//        new GrpcTask().execute();
+        System.out.println(nonBlockingServerRequest());
+    }
+
+    private String nonBlockingServerRequest()
+    {
+        System.out.println("____ nonBlockingServerRequest");
+        final String[] messages = {"Message: "};
+//        ManagedChannel channel = ManagedChannelBuilder.forAddress("192.168.0.83", 10183)
+         ManagedChannel channel = ManagedChannelBuilder.forAddress("paul-vm.macolighting.com", 10183)
+                .usePlaintext(true)
+                .build();
+        DomainUser user = new DomainUser("message test", "asdfghjkl");
+//        User userCredentials = Converter.create().toProtobuf(User.class, user);
+
+        LoginServiceGrpc.LoginServiceFutureStub
+                asyncStub = LoginServiceGrpc.newFutureStub(channel)
+                .withDeadlineAfter(5, TimeUnit.SECONDS);
+
+//        ListenableFuture<RegisteredUser>
+//                userCredentials = asyncStub.signIn(User.newBuilder().setName("Bob").setPassword
+//                ("asdfghjkl").build());
+        User userB = User.newBuilder().setName("BOB").setPassword("asdfghjkl").build();
+//            LoginServiceGrpc.LoginServiceStub asyncStub = LoginServiceGrpc.newStub(channel);
+
+
+//            final CountDownLatch finishLatch = new CountDownLatch(1);
+//            StreamObserver<RegisteredUser> responseObserver = new StreamObserver<RegisteredUser>() {
+//                @Override
+//                public void onNext(RegisteredUser registeredUser) {
+//                    System.out.println("___________onNext");
+//                    String name = registeredUser.getUser().getName();
+//                    String password = registeredUser.getUser().getPassword();
+//                    String token = registeredUser.getToken();
+//                    message[0] += "Name: " + name + "\nPassword: " + password + "\nToken: " + token;
+//                }
+//
+//                @Override
+//                public void onError(Throwable t) {
+//                    System.out.println("___________onError");
+//                    System.out.println(t.getMessage());
+//                    System.out.println(t.getCause());
+//                    message[0] += t;
+////                    finishLatch.countDown();
+//                    try {
+//                        channel.shutdown().awaitTermination(5, TimeUnit.SECONDS);
+//                    } catch (InterruptedException e) {
+//                        Thread.currentThread().interrupt();
+//                    }
+//                }
+//
+//                @Override
+//                public void onCompleted() {
+//                    System.out.println("___________onCompleted");
+//                    message[0] += "Finished RecordRoute";
+////                    finishLatch.countDown();
+//                    try {
+//                        channel.shutdown().awaitTermination(5, TimeUnit.SECONDS);
+//                    } catch (InterruptedException e) {
+//                        Thread.currentThread().interrupt();
+//                    }
+//                }
+//            };
+//            ListenableFuture<RegisteredUser> a = asyncStub.signIn(userCredentials);
+
+        Futures.addCallback(
+                asyncStub.signIn(userB),
+                new FutureCallback<RegisteredUser>()
+                {
+                    @Override
+                    public void onSuccess(final RegisteredUser result)
+                    {
+                        runOnUiThread(new Runnable()
+                                      {
+                                          @Override
+                                          public void run()
+                                          {
+                                              resultText.setText(result.getToken());
+                                          }
+                                      }
+                        );
+                        System.out.println("____success");
+                        messages[0] += result.getUser().getName();
+                        System.out.println(result.getUser().getName());
+                        System.out.println(result.getUser().getPassword());
+                        System.out.println(result.getToken());
+                    }
+
+                    @Override
+                    public void onFailure(final Throwable t)
+                    {
+                        runOnUiThread(new Runnable()
+                                      {
+                                          @Override
+                                          public void run()
+                                          {
+                                              resultText.setText(t.getMessage());
+                                          }
+                                      }
+                        );
+                        System.out.println("____error");
+                        System.out.println(t.getCause());
+                        System.out.println(t.getMessage());
+                    }
+                });
+
+//            asyncStub.signIn(userCredentials, responseObserver);
+        return messages[0];
     }
 
     private class GrpcTask extends AsyncTask<Void, Void, String>
+//    private class GrpcTask extends AsyncTask<Void, Void, String>
     {
         private String host;
         private String message;
@@ -74,23 +185,36 @@ public class MainActivity extends AppCompatActivity
 
         @Override
         protected String doInBackground(Void... nothing) {
+//            return nonBlockingServerRequest();
+            return blockingServerRequest();
+        }
+
+
+
+
+
+        @NonNull
+        private String blockingServerRequest()
+        {
             try {
-                channel = ManagedChannelBuilder.forAddress("0.0.0.0", 8888)
+                channel = ManagedChannelBuilder.forAddress("192.168.0.83", 10183)
+//                channel = ManagedChannelBuilder.forAddress("paul-vm.macolighting.com", 10183)
                         .usePlaintext(true)
                         .build();
-                DomainUser user = new DomainUser(message, "asdfghjkl");
+                DomainUser user = new DomainUser(message.toString(), "asdfghjkl");
                 LoginServiceGrpc.LoginServiceBlockingStub stub = LoginServiceGrpc
-                        .newBlockingStub(channel);
+                        .newBlockingStub(channel)
+                        .withDeadlineAfter(5, TimeUnit.SECONDS);
                 User userCredentials = Converter.create().toProtobuf(User.class, user);
                 System.out.println("____userCredentials: " + userCredentials);
                 RegisteredUser registeredGrpcUser = stub.signIn(userCredentials);
                 String userToken = registeredGrpcUser.getToken();
                 System.out.println("____token: " + userToken);
-                DomainRegisteredUser domainRegisteredUser = Converter.create().toDomain(DomainRegisteredUser.class, registeredGrpcUser);
+                DomainRegisteredUser
+                        domainRegisteredUser = Converter.create().toDomain(DomainRegisteredUser.class, registeredGrpcUser);
                 System.out.println("_____" + domainRegisteredUser.toString());
-//                User user = HelloRequest.newBuilder().setName(this.message).build();
-//                DomainRegisteredUser domainRegisteredUser = stub.signIn(message);
-                return "badjdfj";
+                return "token: " +userToken + "\nuser: " + domainRegisteredUser.getUser().getName
+                        ()+ "\npassword: " + domainRegisteredUser.getUser().getPassword();
 
             } catch (Exception e) {
                 StringWriter sw = new StringWriter();
@@ -104,7 +228,7 @@ public class MainActivity extends AppCompatActivity
         @Override
         protected void onPostExecute(String result) {
             try {
-                channel.shutdown().awaitTermination(1, TimeUnit.SECONDS);
+                channel.shutdown().awaitTermination(5, TimeUnit.SECONDS);
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
             }
