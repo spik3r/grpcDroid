@@ -1,0 +1,40 @@
+package kaitait.com.droidgrpc;
+
+import android.databinding.BaseObservable;
+import android.databinding.Bindable;
+
+/**
+ * Created by kai-tait on 7/03/2017.
+ */
+
+public class Data extends BaseObservable {
+//    public final ObservableField<String> name =
+//            new ObservableField<>();
+    private String name;
+    private String password;
+    
+    public Data() {}
+    
+    public Data(String name, String password) {
+        this.name = name;
+        this.password = password;
+    }
+    
+    @Bindable
+    public String getName() {
+        return name;
+    }
+    
+    public void setName(String name) {
+        this.name = name;
+    }
+    
+    @Bindable
+    public String getPassword() {
+        return password;
+    }
+    
+    public void setPassword(String password) {
+        this.password = password;
+    }
+}

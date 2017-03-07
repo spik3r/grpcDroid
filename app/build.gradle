@@ -14,11 +14,16 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
     }
+
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+    }
+
+    dataBinding {
+        enabled = true
     }
 }
 
@@ -41,56 +46,37 @@ protobuf {
                  java
             }
             task.plugins {
-//                javalite {}
-                grpc {
-                    // Options added to --grpc_out
-//                    option 'lite'
-                }
+                grpc {}
             }
         }
     }
 }
-
-//protobuf {
-//    protoc {
-//        artifact = 'com.google.protobuf:protoc:3.0.0'
-//    }
-//    plugins {
-//        javalite {
-//            artifact = "com.google.protobuf:protoc-gen-javalite:3.0.0"
-//        }
-//        grpc {
-//            artifact = 'io.grpc:protoc-gen-grpc-java:1.1.1'
-//        }
-//    }
-//    generateProtoTasks {
-//        all().each { task ->
-//            task.plugins {
-//                javalite {}
-//
-//                grpc {
-////                     Options added to --grpc_out
-//                    option 'lite'
-//                    outputSubDir = 'grpcjava'
-//                }
-//            }
-//        }
-//    }
-
-//    generateProtoTasks {
-//        all()*.plugins {
-//            grpc {}
-//            javalite {}
-//        }
-//    }
-//}
-
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
+    //Dagger
+    compile 'com.google.dagger:dagger:2.9'
+
+    //Butterknife
+    compile 'com.jakewharton:butterknife:8.5.1'
+
+    //Databinding
+    compile 'com.android.databinding:baseLibrary:2.2.0'
+
+    //RX Binding
+    compile 'com.jakewharton.rxbinding2:rxbinding:2.0.0'
+    compile 'com.jakewharton.rxbinding2:rxbinding-appcompat-v7:2.0.0'
+    compile 'com.jakewharton.rxbinding2:rxbinding-support-v4:2.0.0'
+    compile 'com.jakewharton.rxbinding2:rxbinding-design:2.0.0'
+    compile 'com.jakewharton.rxbinding2:rxbinding-leanback-v17:2.0.0'
+    compile 'com.jakewharton.rxbinding2:rxbinding-recyclerview-v7:2.0.0'
+
+    //RX JAVA
+    compile 'io.reactivex.rxjava2:rxjava:2.0.6'
+    compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
 
     compile 'com.android.support:appcompat-v7:25.0.1'
     compile 'com.google.guava:guava:18.0'
@@ -105,9 +91,7 @@ dependencies {
     compile ('io.grpc:grpc-okhttp:1.1.1')  {
         exclude module: 'jsr305'
     }
-//    compile ('io.grpc:grpc-protobuf-lite:1.1.1')  {
-//        exclude module: 'jsr305'
-//    }
+
     compile ('io.grpc:grpc-stub:1.1.1')  {
         exclude module: 'jsr305'
     }
