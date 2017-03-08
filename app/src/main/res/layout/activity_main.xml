@@ -1,9 +1,9 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    xmlns:data="http://schemas.android.com/apk/res-auto">
+    xmlns:user="http://schemas.android.com/apk/res-auto">
 
     <data>
-        <variable name="data" type="kaitait.com.droidgrpc.Data" />
+        <variable name="user" type="kaitait.com.droidgrpc.ViewModel.User" />
     </data>
 
 <LinearLayout  android:layout_width="match_parent"
@@ -20,7 +20,7 @@
             android:layout_weight="2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@={data.name}"
+            android:text="@={user.name}"
             android:hint="Enter name" />
     </LinearLayout>
 
@@ -29,7 +29,7 @@
         android:id="@+id/password_edit_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@={data.password}"
+        android:text="@={user.password}"
         android:hint="Enter password" />
 
     <Button
@@ -51,7 +51,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scrollbars = "vertical"
-        android:textSize="16sp" />
+        android:textSize="16sp"
+        android:text="@={user.response}"/>
 
 </LinearLayout>
 </layout>
