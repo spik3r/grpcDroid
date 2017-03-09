@@ -16,7 +16,6 @@ public class GRPCClientConnectionManager implements ClientConnectionManager {
     
     private ManagedChannel channel;
     
-//    @Inject
     public GRPCClientConnectionManager() {
                 this.channel = ManagedChannelBuilder
                 .forAddress("192.168.0.83", 10183)
@@ -24,12 +23,6 @@ public class GRPCClientConnectionManager implements ClientConnectionManager {
                 .build();
         System.out.println("____Connection created for: 192.168.0.83:10183");
     }
-    
-//    @Provides
-//    @Singleton
-//    public GRPCClientConnectionManager provideConnectionManager() {
-//        return new GRPCClientConnectionManager();
-//    }
 
     public ManagedChannel getChannel() {
         return channel;

@@ -7,6 +7,8 @@ import android.util.Log;
 
 import com.google.protobuf.InvalidProtocolBufferException;
 
+import java.util.concurrent.ExecutionException;
+
 import javax.inject.Inject;
 
 import api.domain.model.signIn.DomainRegisteredUser;
@@ -21,16 +23,16 @@ import kaitait.com.droidgrpc.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
+    private Integer retryCount = 0;
+    private final Integer MAX_RETIRES = 3;
     
     @Inject
     public GRPCClientConnectionManager manager;
-
+    
     @Inject
     public SignInRepositoryImpl repository;
-//
     
-//    private ClientConnectionManager manager = new GRPCClientConnectionManager();
-//
+
     private DisposableObserver observerButtonObserver;
     private final User userViewModel = new User();
     
@@ -42,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
         binding.setUser(userViewModel);
         GRPCClientConnectionManagerComponent component =
                 DaggerGRPCClientConnectionManagerComponent.create();
-        
+
         component.injectMainActivity(this);
 
         
@@ -77,17 +79,36 @@ public class MainActivity extends AppCompatActivity {
         final DomainUser user = new DomainUser(
                 this.userViewModel.name.get(),
                 this.userViewModel.password.get());
-//        repository = component.provideRepository();
-//        SignInRepository repository = new SignInRepositoryImpl(manager);
     
-        System.out.println("____repository" + repository == null);
-        Log.i("____repository", String.valueOf(repository == null));
-        Log.i("____manager", String.valueOf(manager == null));
-        final DomainRegisteredUser registeredUser = repository.signIn(user);
+        final DomainRegisteredUser registeredUser = getDomainRegisteredUser(user);
         final String displayString = "Name: " + registeredUser.getUser().getName() +
                                      "\nPassword: " + registeredUser.getUser().getPassword() +
                                      "\nToken: " + registeredUser.getToken();
         userViewModel.response.set(displayString);
+    }
+    
+    private DomainRegisteredUser getDomainRegisteredUser(final DomainUser user)
+    {
+        DomainRegisteredUser registeredUser = null;
+        if (retryCount < MAX_RETIRES) {
+            try {
+                registeredUser = repository.signIn(user);
+            }
+            catch (ExecutionException e) {
+                Log.e("Stub timeout", e.getMessage());
+                retryCount ++;
+                getDomainRegisteredUser(user);
+            }
+            catch (InterruptedException e) {
+                Log.e("InterruptedException", e.getMessage());
+                retryCount ++;
+                getDomainRegisteredUser(user);
+            }
+            catch (InvalidProtocolBufferException e) {
+                Log.e("Invalid GRPC", e.getMessage());
+            }
+        }
+        return registeredUser;
     }
     
     @Override
