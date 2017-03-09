@@ -21,7 +21,9 @@ import common.infrastructure.persistence.ClientConnectionManager;
  */
 public class SignInRepositoryImpl implements SignInRepository {
     private LoginServiceGrpc.LoginServiceFutureStub stub;
+//    private ClientConnectionManager manager;
     
+//    @Inject
     public SignInRepositoryImpl(ClientConnectionManager manager) {
         stub = LoginServiceGrpc
                 .newFutureStub(manager.getChannel())
