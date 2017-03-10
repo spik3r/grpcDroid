@@ -21,6 +21,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@={user.name}"
+            android:error="@{user.nameError}"
             android:hint="Enter name" />
     </LinearLayout>
 
@@ -30,6 +31,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@={user.password}"
+        android:error="@{user.passwordError}"
         android:hint="Enter password" />
 
     <Button
