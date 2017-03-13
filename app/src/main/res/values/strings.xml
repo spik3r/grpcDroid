@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">DroidgRPC</string>
+    <string name="error_min_length">Too short</string>
+    <string name="error_max_length">Too long</string>
+    <string name="error_not_empty">Field is required</string>
+    <string name="error_not_equal">Does not match</string>
+    <string name="error_invalid">Invalid value</string>
 </resources>
