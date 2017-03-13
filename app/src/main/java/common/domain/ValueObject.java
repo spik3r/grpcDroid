@@ -1,3 +1,4 @@
 package common.domain;
 
-public class ValueObject {}
+public class ValueObject {
+}

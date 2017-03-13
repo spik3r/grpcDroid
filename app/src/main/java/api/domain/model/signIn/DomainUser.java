@@ -9,38 +9,36 @@ import net.sf.oval.constraint.NotBlank;
 import net.sf.oval.constraint.NotNull;
 
 @ProtoClass(User.class)
-public class DomainUser
-{
+public class DomainUser {
     public DomainUser(String name, String password) {
         this.name = name;
         this.password = password;
     }
-    
+
     @ProtoField
     @NotNull
     @NotBlank
-    @Length(min = 3, max = 1)
-
+    @Length(min = 3)
     private String name;
-    
+
     @ProtoField
     @NotNull
     @NotBlank
     @Length(min = 8)
     private String password;
-    
+
     public String getName() {
         return name;
     }
-    
+
     public void setName(String name) {
         this.name = name;
     }
-    
+
     public String getPassword() {
         return password;
     }
-    
+
     public void setPassword(String password) {
         this.password = password;
     }

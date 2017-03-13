@@ -8,11 +8,11 @@ import io.grpc.ManagedChannelBuilder;
 
 //TODO: test implementation of what the app will pass the api
 public class GRPCClientConnectionManager implements ClientConnectionManager {
-    
+
     private ManagedChannel channel;
-    
+
     public GRPCClientConnectionManager() {
-                this.channel = ManagedChannelBuilder
+        this.channel = ManagedChannelBuilder
                 .forAddress("192.168.0.83", 10183)
                 .usePlaintext(true)
                 .build();

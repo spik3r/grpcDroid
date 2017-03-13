@@ -9,32 +9,22 @@ import dagger.Module;
 import dagger.Provides;
 
 @Module
-public class AppModule
-{
+public class AppModule {
     private Context app_context;
-    
-    public AppModule(Context app_context)
-    {
+
+    public AppModule(Context app_context) {
         this.app_context = app_context;
     }
-    
+
     @Provides
     @Singleton
-    Context ProvidesAppContext()
-    {
+    Context ProvidesAppContext() {
         return this.app_context;
     }
-    
+
     @Provides
     @Singleton
-    LayoutInflater ProvidesLayoutInflater()
-    {
+    LayoutInflater ProvidesLayoutInflater() {
         return (LayoutInflater) app_context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
-    
-    /*@Provides
-    Toolbar ProvidesToolbar()
-    {
-        return new Toolbar(this.app_context, )
-    }*/
 }

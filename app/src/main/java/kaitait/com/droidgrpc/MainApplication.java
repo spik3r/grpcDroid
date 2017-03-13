@@ -9,15 +9,12 @@ import api.infrastructure.provider.component.UiFieldComponent;
 import api.infrastructure.provider.modules.AppModule;
 import api.infrastructure.provider.modules.ValidationModule;
 
-
-public class ConductorApplication extends Application
-{
+public class MainApplication extends Application {
     static AppComponent app_component;
     static UiFieldComponent ui_field_component;
-     
+
     @Override
-    public void onCreate()
-    {
+    public void onCreate() {
         super.onCreate();
         app_component = DaggerAppComponent.builder().appModule(new AppModule(this)).build();
         ui_field_component = DaggerUiFieldComponent
@@ -26,14 +23,8 @@ public class ConductorApplication extends Application
                 .validationModule(new ValidationModule(this))
                 .build();
     }
-    
-    public static AppComponent GetAppComponent()
-    {
-        return app_component;
-    }
-    
-    public static UiFieldComponent GetUiFieldComponent()
-    {
+
+    public static UiFieldComponent GetUiFieldComponent() {
         return ui_field_component;
     }
 }

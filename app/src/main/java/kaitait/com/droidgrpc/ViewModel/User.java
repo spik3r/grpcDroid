@@ -21,67 +21,61 @@ public class User extends BaseObservable {
     @Length(min = 3)
     public ObservableField<String> name;
     public ObservableField<Object> nameError;
-    
+
     @ProtoField
     @NotNull
     @NotBlank
     @Length(min = 8)
     public ObservableField<String> password;
     public ObservableField<Object> passwordError;
-    
+
     public ObservableField<String> response;
     public PublishSubject<Object> sendButton;
-    
+
     private ValidatingForm login_form;
     public Observable<Boolean> login_click_validity;
-    
+
     public User() {
         this.name = new ObservableField<>();
         this.nameError = new ObservableField<>();
         this.password = new ObservableField<>();
         this.response = new ObservableField<>();
         this.sendButton = PublishSubject.create();
-    
-        InitialiseClickObservables();
-        CreateValidationForm();
-        AddFieldsRequiringValidation();
-        InitialiseLoginClick();
+
+        initialiseClickObservables();
+        createValidationForm();
+        addFieldsRequiringValidation();
+        initialiseLoginClick();
     }
-    
-    private void InitialiseClickObservables()
-    {
+
+    private void initialiseClickObservables() {
         this.sendButton = PublishSubject.create();
     }
-    
-    private void CreateValidationForm()
-    {
+
+    private void createValidationForm() {
         this.login_form = new ValidatingForm(this.sendButton);
     }
-    
-    
-    private void AddFieldsRequiringValidation()
-    {
+
+    private void addFieldsRequiringValidation() {
         ValidatingField username_widget
-                = this.login_form.AddValidatingField(this, "name", true);
+                = this.login_form.addValidatingField(this, "name", true);
         ValidatingField password_widget
-                = this.login_form.AddValidatingField(this, "password", true);
+                = this.login_form.addValidatingField(this, "password", true);
         SetObservableFields(username_widget, password_widget);
     }
-    
+
     private void SetObservableFields(
             ValidatingField username_widget,
-            ValidatingField password_widget)
-    {
+            ValidatingField password_widget) {
         this.name = username_widget.GetValidatableField();
         this.password = password_widget.GetValidatableField();
         this.nameError = username_widget.GetErrorObservableField();
         this.passwordError = password_widget.GetErrorObservableField();
     }
-    
-    private void InitialiseLoginClick()
-    {
+
+    private void initialiseLoginClick() {
         this.login_click_validity = this.sendButton.withLatestFrom(
-                login_form.GetFormValidityStream(),
+                login_form.getFormValidityStream(),
                 new FormClickValidityCombiner());
     }
 }

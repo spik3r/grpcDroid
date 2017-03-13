@@ -18,26 +18,23 @@ import common.infrastructure.persistence.ClientConnectionManager;
 
 public class SignInRepositoryImpl implements SignInRepository {
     private ClientConnectionManager manager;
-    
+
     public SignInRepositoryImpl(ClientConnectionManager manager) {
         this.manager = manager;
     }
-    
+
     private LoginServiceFutureStub getStub() {
-        return  LoginServiceGrpc
+        return LoginServiceGrpc
                 .newFutureStub(manager.getChannel());
     }
-    
+
     @Override
     public DomainRegisteredUser signIn(DomainUser domainUser) throws
-            InterruptedException, InvalidProtocolBufferException, ExecutionException
-    {
+            InterruptedException, InvalidProtocolBufferException, ExecutionException {
         LoginServiceFutureStub stub = getStub();
         User request = Converter.create().toProtobuf(User.class, domainUser);
         ListenableFuture<RegisteredUser> response = stub.signIn(request);
-        RegisteredUser registeredUser = null;
-        registeredUser = response.get();
-    
-        return Converter.create().toDomain(DomainRegisteredUser.class,registeredUser);
+        RegisteredUser registeredUser = response.get();
+        return Converter.create().toDomain(DomainRegisteredUser.class, registeredUser);
     }
 }

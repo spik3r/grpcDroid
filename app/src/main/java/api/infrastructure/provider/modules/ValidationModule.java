@@ -9,28 +9,23 @@ import dagger.Module;
 import dagger.Provides;
 import kaitait.com.droidgrpc.utils.ValidationErrorParser;
 
-
 @Module
-public class ValidationModule
-{
+public class ValidationModule {
     private final Context app_context;
-    
-    public ValidationModule(Context app_context)
-    {
+
+    public ValidationModule(Context app_context) {
         this.app_context = app_context;
     }
-    
+
     @Provides
     @ActivityScope
-    Validator ProvidesValidator()
-    {
+    Validator ProvidesValidator() {
         return new Validator();
     }
-    
+
     @Provides
     @ActivityScope
-    ValidationErrorParser ProvidesValidationErrorParser()
-    {
+    ValidationErrorParser ProvidesValidationErrorParser() {
         return new ValidationErrorParser(app_context);
     }
 }

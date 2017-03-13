@@ -1,3 +1,4 @@
 package common.domain;
 
-public class AggregateRoot extends Entity {}
+public class AggregateRoot extends Entity {
+}

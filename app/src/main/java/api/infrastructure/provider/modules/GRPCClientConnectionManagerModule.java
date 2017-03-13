@@ -7,12 +7,12 @@ import dagger.Provides;
 
 @Module
 public class GRPCClientConnectionManagerModule {
-    
+
     @Provides
     public GRPCClientConnectionManager provideManager() {
         return new GRPCClientConnectionManager();
     }
-    
+
     @Provides
     public SignInRepositoryImpl provideRepository(GRPCClientConnectionManager manager) {
         return new SignInRepositoryImpl(manager);

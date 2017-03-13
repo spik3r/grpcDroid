@@ -9,45 +9,35 @@ import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.functions.Cancellable;
 
-public class FieldUtils
-{
+public class ObservableConverter {
     @NonNull
-    public static <T> ObservableField<T> ToField(@NonNull Observable<T> observable)
-    {
+    public static <T> ObservableField<T> ToField(@NonNull Observable<T> observable) {
         return ReadOnlyField.create(observable);
     }
-    
+
     @NonNull
-    public static <T> Observable<String> ToObservable(@NonNull final ObservableField<String> field)
-    {
-        return Observable.create(new ObservableOnSubscribe<String>()
-        {
+    public static <T> Observable<String> ToObservable(@NonNull final ObservableField<String> field) {
+        return Observable.create(new ObservableOnSubscribe<String>() {
             @Override
-            public void subscribe(final ObservableEmitter<String> e) throws Exception
-            {
-                final OnPropertyChangedCallback callback = new OnPropertyChangedCallback()
-                {
+            public void subscribe(final ObservableEmitter<String> e) throws Exception {
+                final OnPropertyChangedCallback callback = new OnPropertyChangedCallback() {
                     @Override
                     public void onPropertyChanged(
                             android.databinding.Observable databinding_observable,
-                            int property_id)
-                    {
-                        if (databinding_observable == field)
-                        {
-                            e.onNext(field.get() == null? "" : field.get());
+                            int property_id) {
+                        if (databinding_observable == field) {
+                            e.onNext(field.get() == null ? "" : field.get());
                         }
                     }
                 };
                 field.addOnPropertyChangedCallback(callback);
-                e.setCancellable(new Cancellable()
-                {
+                e.setCancellable(new Cancellable() {
                     @Override
-                    public void cancel() throws Exception
-                    {
+                    public void cancel() throws Exception {
                         field.removeOnPropertyChangedCallback(callback);
                     }
                 });
-                
+
             }
         });
     }

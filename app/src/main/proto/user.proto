@@ -20,6 +20,7 @@ message RegisteredUser {
 
 service LoginService {
 
-    rpc SignIn (User) returns (RegisteredUser) {}
+    rpc SignIn (User) returns (RegisteredUser) {
+    }
 
 }

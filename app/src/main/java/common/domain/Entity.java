@@ -1,3 +1,4 @@
 package common.domain;
 
-public class Entity {}
+public class Entity {
+}
