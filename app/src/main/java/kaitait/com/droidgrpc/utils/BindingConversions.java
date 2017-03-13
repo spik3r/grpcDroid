@@ -7,7 +7,7 @@ import io.reactivex.subjects.PublishSubject;
 
 public class BindingConversions {
     @BindingConversion
-    public static View.OnClickListener ToOnClickListener(final PublishSubject<Object> listener) {
+    public static View.OnClickListener toOnClickListener(final PublishSubject<Object> listener) {
         if (listener != null) {
             return new View.OnClickListener() {
                 @Override

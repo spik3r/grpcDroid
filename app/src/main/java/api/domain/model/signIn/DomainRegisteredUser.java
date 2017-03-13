@@ -6,8 +6,10 @@ import com.test.generated.User;
 import net.badata.protobuf.converter.annotation.ProtoClass;
 import net.badata.protobuf.converter.annotation.ProtoField;
 
+import common.domain.ValueObject;
+
 @ProtoClass(RegisteredUser.class)
-public class DomainRegisteredUser {
+public class DomainRegisteredUser extends ValueObject {
     public DomainRegisteredUser() {
     }
 

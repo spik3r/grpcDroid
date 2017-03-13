@@ -19,8 +19,8 @@ public class ValidationErrorParser {
         this.app_context = context;
     }
 
-    public String ParseOvalError(ConstraintViolation violation) {
-        Log.i("ParseOvalError", violation.getErrorCode());
+    public String parseOvalError(ConstraintViolation violation) {
+        Log.i("parseOvalError", violation.getErrorCode());
         if (violation.getErrorCode().equals(LENGTH_ERROR)) {
             return app_context.getString(R.string.error_min_length);
         } else if (violation.getErrorCode().equals(MIN_LENGTH_ERROR)) {

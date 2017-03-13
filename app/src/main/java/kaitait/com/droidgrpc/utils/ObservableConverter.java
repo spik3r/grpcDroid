@@ -11,12 +11,12 @@ import io.reactivex.functions.Cancellable;
 
 public class ObservableConverter {
     @NonNull
-    public static <T> ObservableField<T> ToField(@NonNull Observable<T> observable) {
+    public static <T> ObservableField<T> toField(@NonNull Observable<T> observable) {
         return ReadOnlyField.create(observable);
     }
 
     @NonNull
-    public static <T> Observable<String> ToObservable(@NonNull final ObservableField<String> field) {
+    public static <T> Observable<String> toObservable(@NonNull final ObservableField<String> field) {
         return Observable.create(new ObservableOnSubscribe<String>() {
             @Override
             public void subscribe(final ObservableEmitter<String> e) throws Exception {

@@ -68,7 +68,7 @@ public class ValidatingField {
 
     private Observable<String> GetValueStream() {
         if (this.value_stream == null) {
-            this.value_stream = ObservableConverter.ToObservable(GetValidatableField())
+            this.value_stream = ObservableConverter.toObservable(GetValidatableField())
                     .distinctUntilChanged()
                     .map(new StringTrimmingFunction());
         }
@@ -103,7 +103,7 @@ public class ValidatingField {
         if (this.error_observable_field == null) {
             Observable<Object> readable_error = this.GetViolationStream()
                     .map(new ReadableErrorFunction());
-            this.error_observable_field = ObservableConverter.ToField(readable_error);
+            this.error_observable_field = ObservableConverter.toField(readable_error);
         }
         return this.error_observable_field;
     }

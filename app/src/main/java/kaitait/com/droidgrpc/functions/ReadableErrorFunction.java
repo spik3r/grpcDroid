@@ -24,7 +24,7 @@ public class ReadableErrorFunction implements Function<List<ConstraintViolation>
         if (violations.size() == 0) {
             return SpecialFunctionReturns.NO_ERROR;
         } else {
-            return validation_error_parser.ParseOvalError(violations.get(0));
+            return validation_error_parser.parseOvalError(violations.get(0));
         }
     }
 }

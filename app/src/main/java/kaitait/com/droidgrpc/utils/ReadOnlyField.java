@@ -25,7 +25,7 @@ public class ReadOnlyField<T> extends ObservableField<T> {
                     @Override
                     public void accept(@io.reactivex.annotations.NonNull T t) throws Exception {
                         if (t instanceof SpecialFunctionReturns) {
-                            ReadOnlyField.this.HandleSpecialFunctionCase((SpecialFunctionReturns) t);
+                            ReadOnlyField.this.handleSpecialFunctionCase((SpecialFunctionReturns) t);
                         } else {
                             ReadOnlyField.super.set(null);
                             ReadOnlyField.super.set(t);
@@ -42,7 +42,7 @@ public class ReadOnlyField<T> extends ObservableField<T> {
                 .share();
     }
 
-    private void HandleSpecialFunctionCase(SpecialFunctionReturns special_function_return) {
+    private void handleSpecialFunctionCase(SpecialFunctionReturns special_function_return) {
         if (special_function_return == SpecialFunctionReturns.NO_ERROR) {
             ReadOnlyField.super.set(null);
         }

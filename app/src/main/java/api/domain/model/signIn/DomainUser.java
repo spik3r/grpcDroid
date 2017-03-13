@@ -8,8 +8,10 @@ import net.sf.oval.constraint.Length;
 import net.sf.oval.constraint.NotBlank;
 import net.sf.oval.constraint.NotNull;
 
+import common.domain.ValueObject;
+
 @ProtoClass(User.class)
-public class DomainUser {
+public class DomainUser extends ValueObject {
     public DomainUser(String name, String password) {
         this.name = name;
         this.password = password;
