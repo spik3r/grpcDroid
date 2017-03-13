@@ -11,9 +11,7 @@ import io.reactivex.Observable;
 import kaitait.com.droidgrpc.functions.FormValidationFunction;
 import kaitait.com.droidgrpc.functions.NewViolationCombinationFunction;
 
-/**
- * @author Alex Royds
- */
+
 
 public class ValidatingForm
 {

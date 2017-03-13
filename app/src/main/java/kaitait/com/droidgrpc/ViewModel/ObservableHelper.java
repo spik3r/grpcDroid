@@ -8,10 +8,6 @@ import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Cancellable;
 
-/**
- * Created by kai-tait on 10/03/2017.
- */
-
 public class ObservableHelper {
     @NonNull
     public static <T> Observable<String> ToObservable(@NonNull final ObservableField<String> field)

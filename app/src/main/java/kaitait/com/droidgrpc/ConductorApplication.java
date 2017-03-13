@@ -9,9 +9,6 @@ import api.infrastructure.provider.component.UiFieldComponent;
 import api.infrastructure.provider.modules.AppModule;
 import api.infrastructure.provider.modules.ValidationModule;
 
-/**
- * @author Alex Royds
- */
 
 public class ConductorApplication extends Application
 {

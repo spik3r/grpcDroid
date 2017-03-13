@@ -10,10 +10,6 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import kaitait.com.droidgrpc.functions.enums.SpecialFunctionReturns;
 
-/**
- * @author Alex Royds
- */
-
 public class ReadOnlyField<T> extends ObservableField<T>
 {
     final Observable<T> source;

@@ -16,9 +16,6 @@ import api.domain.model.signIn.DomainUser;
 import api.domain.model.signIn.SignInRepository;
 import common.infrastructure.persistence.ClientConnectionManager;
 
-/**
- * Created by kai-tait on 15/02/2017.
- */
 public class SignInRepositoryImpl implements SignInRepository {
     private ClientConnectionManager manager;
     

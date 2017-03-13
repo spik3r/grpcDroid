@@ -8,9 +8,6 @@ import net.sf.oval.exception.OValException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/**
- * @author Alex Royds
- */
 
 public class UnicodeRange0020to007ECheck extends 
         AbstractAnnotationCheck<UnicodeRange0020to007E>

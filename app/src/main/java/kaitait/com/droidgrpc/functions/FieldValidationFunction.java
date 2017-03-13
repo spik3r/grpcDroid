@@ -9,10 +9,6 @@ import java.util.List;
 
 import io.reactivex.functions.Function;
 
-/**
- * @author Alex Royds
- */
-
 public class FieldValidationFunction implements Function<String, List<ConstraintViolation>>
 {
     private final Validator validator;

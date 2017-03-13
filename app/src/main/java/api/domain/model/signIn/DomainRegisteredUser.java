@@ -6,9 +6,6 @@ import com.test.generated.User;
 import net.badata.protobuf.converter.annotation.ProtoClass;
 import net.badata.protobuf.converter.annotation.ProtoField;
 
-/**
- * Created by kai-tait on 23/02/2017.
- */
 @ProtoClass(RegisteredUser.class)
 public class DomainRegisteredUser
 {

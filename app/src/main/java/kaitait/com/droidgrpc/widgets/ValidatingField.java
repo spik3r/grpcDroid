@@ -12,6 +12,7 @@ import java.util.concurrent.TimeUnit;
 import javax.inject.Inject;
 
 import io.reactivex.Observable;
+import kaitait.com.droidgrpc.ConductorApplication;
 import kaitait.com.droidgrpc.functions.ClickToFieldValueFunction;
 import kaitait.com.droidgrpc.functions.FieldValidationFunction;
 import kaitait.com.droidgrpc.functions.ReadableErrorFunction;
@@ -19,11 +20,6 @@ import kaitait.com.droidgrpc.functions.StringTrimmingFunction;
 import kaitait.com.droidgrpc.utils.FieldUtils;
 import kaitait.com.droidgrpc.utils.ValidatableField;
 
-//import net.badata.protobuf.converter.utils.FieldUtils;
-
-/**
- * @author Alex Royds
- */
 
 public class ValidatingField
 {
@@ -31,7 +27,6 @@ public class ValidatingField
     Validator validator;
     @Inject
     Context app_context;
-    //TODO: inject the functions
     
     private final Object validated_object;
     private String input_field_name;
@@ -52,7 +47,7 @@ public class ValidatingField
             Observable<Object> next_click)
     {
         
-//        ConductorApplication.GetUiFieldComponent().Inject(this);
+        ConductorApplication.GetUiFieldComponent().Inject(this);
         this.validated_object = validated_object;
         this.input_field_name = input_field_name;
         this.required = required;

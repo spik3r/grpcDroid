@@ -9,9 +9,6 @@ import dagger.Module;
 import dagger.Provides;
 import kaitait.com.droidgrpc.utils.ValidationErrorParser;
 
-/**
- * @author Alex Royds
- */
 
 @Module
 public class ValidationModule

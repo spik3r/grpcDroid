@@ -11,10 +11,6 @@ import kaitait.com.droidgrpc.ConductorApplication;
 import kaitait.com.droidgrpc.functions.enums.SpecialFunctionReturns;
 import kaitait.com.droidgrpc.utils.ValidationErrorParser;
 
-/**
- * @author Alex Royds
- */
-
 public class ReadableErrorFunction implements Function<List<ConstraintViolation>, Object>
 {
     @Inject

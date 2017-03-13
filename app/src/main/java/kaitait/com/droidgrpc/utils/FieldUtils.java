@@ -9,10 +9,6 @@ import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.functions.Cancellable;
 
-/**
- * @author Alex Royds
- */
-
 public class FieldUtils
 {
     @NonNull
@@ -43,7 +39,6 @@ public class FieldUtils
                     }
                 };
                 field.addOnPropertyChangedCallback(callback);
-//                e.setCancellable(() -> field.removeOnPropertyChangedCallback(callback));
                 e.setCancellable(new Cancellable()
                 {
                     @Override

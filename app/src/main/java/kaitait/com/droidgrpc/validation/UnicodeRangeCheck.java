@@ -8,9 +8,6 @@ import net.sf.oval.exception.OValException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/**
- * @author Alex Royds
- */
 
 public class UnicodeRangeCheck extends 
         AbstractAnnotationCheck<UnicodeRange0020to007E>
@@ -29,14 +26,4 @@ public class UnicodeRangeCheck extends
         Matcher matcher = alphanumeric_pattern.matcher(value_to_validate.toString());
         return matcher.matches();
     }
-    
-    //TODO
-    /*@Override
-    public Map<String, String> createMessageVariables()
-    {
-        Map<String, String> messageVariables = new HashMap<String, String>(2);
-        messageVariables.put("max", Integer.toString(max));
-        messageVariables.put("min", Integer.toString(min));
-        return messageVariables;
-    }*/
 }

@@ -6,10 +6,6 @@ import java.util.List;
 
 import io.reactivex.functions.Function;
 
-/**
- * @author Alex Royds
- */
-
 public class FormValidationFunction implements Function<List<ConstraintViolation>, Boolean>
 {
     @Override

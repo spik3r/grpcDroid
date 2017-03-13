@@ -14,10 +14,6 @@ import kaitait.com.droidgrpc.functions.FormClickValidityCombiner;
 import kaitait.com.droidgrpc.widgets.ValidatingField;
 import kaitait.com.droidgrpc.widgets.ValidatingForm;
 
-/**
- * Created by kai-tait on 7/03/2017.
- */
-
 public class User extends BaseObservable {
     @ProtoField
     @NotNull
@@ -29,7 +25,7 @@ public class User extends BaseObservable {
     @ProtoField
     @NotNull
     @NotBlank
-    @Length(min = 5)
+    @Length(min = 8)
     public ObservableField<String> password;
     public ObservableField<Object> passwordError;
     

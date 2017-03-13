@@ -7,9 +7,6 @@ import api.infrastructure.provider.modules.AppModule;
 import dagger.Component;
 import kaitait.com.droidgrpc.utils.ValidationErrorParser;
 
-/**
- * @author Alex Royds
- */
 
 @Singleton
 @Component (modules = {AppModule.class})

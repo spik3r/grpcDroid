@@ -1,17 +1,15 @@
 package kaitait.com.droidgrpc.utils;
 
 import android.content.Context;
+import android.util.Log;
 
 import net.sf.oval.ConstraintViolation;
 
 import kaitait.com.droidgrpc.R;
 
-/**
- * @author Alex Royds
- */
-
 public class ValidationErrorParser
 {
+    private static final String LENGTH_ERROR = "net.sf.oval.constraint.Length";
     private static final String MIN_LENGTH_ERROR = "net.sf.oval.constraint.MinLength";
     private static final String MAX_LENGTH_ERROR = "net.sf.oval.constraint.MaxLength";
     private static final String NOT_EMPTY_ERROR = "net.sf.oval.constraint.NotEmpty";
@@ -25,7 +23,12 @@ public class ValidationErrorParser
     
     public String ParseOvalError(ConstraintViolation violation)
     {
-        if (violation.getErrorCode().equals(MIN_LENGTH_ERROR))
+        Log.i("ParseOvalError", violation.getErrorCode());
+        if (violation.getErrorCode().equals(LENGTH_ERROR))
+        {
+            return app_context.getString(R.string.error_min_length);
+        }
+        else if (violation.getErrorCode().equals(MIN_LENGTH_ERROR))
         {
             return app_context.getString(R.string.error_min_length);
         }

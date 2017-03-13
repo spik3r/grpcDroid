@@ -7,10 +7,7 @@ import java.util.List;
 
 import io.reactivex.functions.Function;
 
-/**
- * @author Alex Royds
- */
-//TODO: javadoc explaining it will throw if wrong list array type is provided
+
 public class NewViolationCombinationFunction implements Function<Object[], List<ConstraintViolation>>
 {
     @Override

@@ -6,12 +6,7 @@ import common.infrastructure.persistence.ClientConnectionManager;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 
-/**
- * Created by kai-tait on 27/02/2017.
- */
-
 //TODO: test implementation of what the app will pass the api
-//@Module
 public class GRPCClientConnectionManager implements ClientConnectionManager {
     
     private ManagedChannel channel;

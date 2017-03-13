@@ -5,9 +5,6 @@ import dagger.Component;
 import kaitait.com.droidgrpc.functions.ReadableErrorFunction;
 import kaitait.com.droidgrpc.widgets.ValidatingField;
 
-/**
- * @author Alex Royds
- */
 
 @ActivityScope
 @Component(dependencies = {AppComponent.class},

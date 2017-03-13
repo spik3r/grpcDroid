@@ -5,10 +5,6 @@ import android.view.View;
 
 import io.reactivex.subjects.PublishSubject;
 
-/**
- * @author Alex Royds
- */
-
 public class BindingConversions
 {
     @BindingConversion
@@ -16,7 +12,14 @@ public class BindingConversions
     {
         if (listener != null)
         {
-            return view -> listener.onNext(new Object());
+            return new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View view)
+                {
+                    listener.onNext(new Object());
+                }
+            };
         } 
         else 
         {

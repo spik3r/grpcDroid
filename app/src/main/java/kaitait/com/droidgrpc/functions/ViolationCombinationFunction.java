@@ -7,9 +7,6 @@ import java.util.List;
 
 import io.reactivex.functions.BiFunction;
 
-/**
- * @author Alex Royds
- */
 
 public class ViolationCombinationFunction implements BiFunction<
         List<ConstraintViolation>,

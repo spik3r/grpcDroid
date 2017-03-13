@@ -2,9 +2,6 @@ package kaitait.com.droidgrpc.functions;
 
 import io.reactivex.functions.BiFunction;
 
-/**
- * @author Alex Royds
- */
 public class FormClickValidityCombiner implements BiFunction<Object, Boolean, Boolean>
 {
     @Override

@@ -8,9 +8,6 @@ import net.sf.oval.constraint.Length;
 import net.sf.oval.constraint.NotBlank;
 import net.sf.oval.constraint.NotNull;
 
-/**
- * Created by kai-tait on 15/02/2017.
- */
 @ProtoClass(User.class)
 public class DomainUser
 {

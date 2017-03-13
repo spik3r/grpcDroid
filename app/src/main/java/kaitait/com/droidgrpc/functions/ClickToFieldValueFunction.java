@@ -4,9 +4,6 @@ import android.databinding.ObservableField;
 
 import io.reactivex.functions.Function;
 
-/**
- * @author Alex Royds
- */
 public class ClickToFieldValueFunction implements Function<Object, String>
 {
     private final ObservableField<String> observable_field;

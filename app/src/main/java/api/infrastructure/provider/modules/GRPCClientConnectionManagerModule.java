@@ -5,10 +5,6 @@ import common.infrastructure.persistence.grpc.GRPCClientConnectionManager;
 import dagger.Module;
 import dagger.Provides;
 
-/**
- * Created by kai-tait on 8/03/2017.
- */
-
 @Module
 public class GRPCClientConnectionManagerModule {
     

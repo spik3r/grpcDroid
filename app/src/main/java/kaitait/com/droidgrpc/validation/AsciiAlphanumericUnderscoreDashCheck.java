@@ -8,10 +8,6 @@ import net.sf.oval.exception.OValException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/**
- * @author Alex Royds
- */
-
 public class AsciiAlphanumericUnderscoreDashCheck extends 
         AbstractAnnotationCheck<AsciiAlphanumericUnderscoreDash>
 {
