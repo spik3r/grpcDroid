@@ -24,7 +24,7 @@ public class MainApplication extends Application {
                 .build();
     }
 
-    public static UiFieldComponent GetUiFieldComponent() {
+    public static UiFieldComponent getUiFieldComponent() {
         return ui_field_component;
     }
 }

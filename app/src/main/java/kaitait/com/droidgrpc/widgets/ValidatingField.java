@@ -44,7 +44,7 @@ public class ValidatingField {
             boolean required,
             Observable<Object> next_click) {
 
-        MainApplication.GetUiFieldComponent().Inject(this);
+        MainApplication.getUiFieldComponent().Inject(this);
         this.validated_object = validated_object;
         this.input_field_name = input_field_name;
         this.required = required;

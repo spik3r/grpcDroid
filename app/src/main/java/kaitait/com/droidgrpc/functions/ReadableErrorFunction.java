@@ -16,7 +16,7 @@ public class ReadableErrorFunction implements Function<List<ConstraintViolation>
     ValidationErrorParser validation_error_parser;
 
     public ReadableErrorFunction() {
-        MainApplication.GetUiFieldComponent().Inject(this);
+        MainApplication.getUiFieldComponent().Inject(this);
     }
 
     @Override
